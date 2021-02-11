@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use  Illuminate\Database\Eloquent\Model as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Role
  * @package App\Models
- * @version February 11, 2021, 12:29 pm UTC
+ * @version February 11, 2021, 2:21 pm UTC
  *
+ * @property \Illuminate\Database\Eloquent\Collection $users
  * @property string $name
  */
 class Role extends Model
@@ -21,6 +22,9 @@ class Role extends Model
 
     public $table = 'roles';
     
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
+
 
     protected $dates = ['deleted_at'];
 
@@ -46,8 +50,17 @@ class Role extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required'
+        'name' => 'required|string|max:255',
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable',
+        'deleted_at' => 'nullable'
     ];
 
-    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function users()
+    {
+        return $this->hasMany(\App\Models\User::class, 'role_id');
+    }
 }

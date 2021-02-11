@@ -24,4 +24,26 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+Route::resource('coupons', App\Http\Controllers\CouponController::class);
+
+Route::resource('services', App\Http\Controllers\ServiceController::class);
+
+Route::resource('serviceCategories', App\Http\Controllers\ServiceCategoryController::class);
+
+Route::resource('customers', App\Http\Controllers\CustomerController::class);
+
 Route::resource('roles', App\Http\Controllers\RoleController::class);
+
+Route::resource('users', App\Http\Controllers\UserController::class);
