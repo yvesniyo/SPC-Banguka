@@ -109,4 +109,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Models\Service::class, 'employee_id');
     }
+
+
+    public static function htmlSelectIdName()
+    {
+        return self::query()->select("id", "name")
+            ->where("role_id", 2)->pluck("name", "id");
+    }
 }

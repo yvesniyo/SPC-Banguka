@@ -22,7 +22,7 @@ class ServiceCategory extends Model
     use HasFactory;
 
     public $table = 'service_categories';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -66,5 +66,10 @@ class ServiceCategory extends Model
     public function services()
     {
         return $this->hasMany(\App\Models\Service::class, 'service_category_id');
+    }
+
+    public static function htmlSelectIdName()
+    {
+        return self::query()->select("id", "name")->pluck("name", "id");
     }
 }

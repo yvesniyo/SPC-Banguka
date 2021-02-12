@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,14 +22,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
+
+Route::get("/profile", [ProfileController::class, "edit"])->name("profile.edit");
+Route::put("/profile", [ProfileController::class, "update"])->name("profile.update");
+Route::get("/bookingCalendar", [BookingController::class, "calendar"])->name("booking.calendar");
 
 
 
-
-
-
-
+Route::get("/web", [WebController::class, "index"])->name("web");
+Route::get("/web/contact-us", [WebController::class, "contactUs"])->name("web.contactUs");
+Route::get("/web/about-us", [WebController::class, "aboutUs"])->name("web.aboutUs");
+Route::get("/web/privacy-policy", [WebController::class, "privacyPolicy"])->name("web.privacyPolicy");
 
 
 
@@ -47,3 +54,6 @@ Route::resource('customers', App\Http\Controllers\CustomerController::class);
 Route::resource('roles', App\Http\Controllers\RoleController::class);
 
 Route::resource('users', App\Http\Controllers\UserController::class);
+
+
+Route::resource('bookings', App\Http\Controllers\BookingController::class);

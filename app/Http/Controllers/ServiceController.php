@@ -9,6 +9,9 @@ use App\Http\Requests\UpdateServiceRequest;
 use App\Repositories\ServiceRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use App\Models\ServiceCategory;
+use App\Repositories\ServiceCategoryRepository;
+use App\Models\User;
 use Response;
 
 class ServiceController extends AppBaseController
@@ -37,9 +40,11 @@ class ServiceController extends AppBaseController
      *
      * @return Response
      */
-    public function create()
+    public function create(ServiceCategoryRepository $serviceCategoryRepository)
     {
-        return view('services.create');
+        $categories = ServiceCategory::htmlSelectIdName();
+        $employees = User::htmlSelectIdName();
+        return view('services.create', compact("categories", 'employees'));
     }
 
     /**
@@ -97,7 +102,11 @@ class ServiceController extends AppBaseController
             return redirect(route('services.index'));
         }
 
-        return view('services.edit')->with('service', $service);
+        $categories = ServiceCategory::htmlSelectIdName();
+        $employees = User::htmlSelectIdName();
+
+
+        return view('services.edit', compact('categories', 'employees'))->with('service', $service);
     }
 
     /**

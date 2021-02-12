@@ -7,7 +7,7 @@
     <title>{{ config("app.name") }}</title>
 
     <!-- Fonts -->
-    {{-- <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@100;200;300;400;500;600&display=swap" rel="stylesheet"> --}}
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
 
 
     <!-- General CSS Files -->
@@ -16,7 +16,7 @@
 
     <!-- CSS Libraries -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.23.0/slimselect.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css">
 
 
@@ -45,6 +45,13 @@
             display: flex;
             align-items: center;
 
+        }
+
+        html,
+        body,
+        .wrapper {
+            font-family: 'Roboto', sans-serif;
+            font-size: 13px;
         }
 
     </style>
@@ -79,7 +86,7 @@
                             <div class="d-sm-none d-lg-inline-block">{{ Auth::user()->name }}</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="features-profile.html" class="dropdown-item has-icon">
+                            <a href="{{ route("profile.edit") }}" class="dropdown-item has-icon">
                                 <i class="far fa-user"></i> Profile
                             </a>
                             <a href="features-activities.html" class="dropdown-item has-icon">
