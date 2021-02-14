@@ -94,7 +94,7 @@ $settings = settings();
                                     </div>
                                 </div>
                             </li>
-                            <li class="mb-3">
+                            <li class="mb-3 d-none">
                                 <a href="{{ route("guest.login") }}">
                                     <i class="fa fa-user mr-2"> </i>Sign In </a>
                             </li>
