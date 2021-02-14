@@ -6,8 +6,8 @@
     <title>{{ config("app.name") }}</title>
 
     <!-- Below three is for SEO -->
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <meta name="description" content="SPC Banguka company investment trading technology, designed to help Rwandan young talented people in achieving their rightful success in community ">
+    <meta name="keywords" content="spc,rwanda,banguka ,spc,smart ,people ,company,investement,trading,technology">
 
     <link type="text/css" rel="stylesheet" href="{{ asset("/assets/css/web_front-styles.css") }} ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css">
