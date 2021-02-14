@@ -4,11 +4,12 @@
 @section('content')
 <section class="cart-area sp-80">
     <div class="container">
+        @include('flash::message')
         <div class="row">
             <div class="col-12">
                 <div class="all-title">
                     <h3 class="sec-title">
-                        Checkout </h3>
+                        Booking Summary </h3>
                 </div>
             </div>
         </div>
@@ -20,12 +21,22 @@
                         <ul>
                             <li>
                                 <span>
-                                    Booking Date:
+                                    Booking Start Date:
                                 </span>
                                 <span>
-                                    Wednesday, February 17th
+                                    {{ $booking->starts_at->format("l M-Y") }}
                                 </span>
                             </li>
+
+                            <li>
+                                <span>
+                                    Booking End Date:
+                                </span>
+                                <span>
+                                    {{ $booking->ends_at->format("l M-Y") }}
+                                </span>
+                            </li>
+
                             <li>
                                 <span>
                                     Booking Time:
@@ -39,7 +50,7 @@
                                     Amount to pay:
                                 </span>
                                 <span>
-                                    $88.5
+                                    {{ format_money($booking->bookable->real_price) }}
                                 </span>
                             </li>
                             <li>
@@ -47,30 +58,39 @@
                                     Employee:
                                 </span>
                                 <span>
-                                    None
+                                    {{ $booking->bookable->employee->name ?? "None" }}
                                 </span>
                             </li>
+                            <li>
+                                <span>
+                                    Your Name:
+                                </span>
+                                <span>
+                                    {{ $booking->customer->name ?? "None" }}
+                                </span>
+                            </li>
+
+                            <li>
+                                <span>
+                                    Your contact phone:
+                                </span>
+                                <span>
+                                    {{ $booking->customer->phone ?? "None" }}
+                                </span>
+                            </li>
+
                         </ul>
 
                     </div>
-                    <div class="instruction">
-                        <h5>Any special instructions?</h5>
-                        <form id="booking" class="ajax-form" method="POST">
-                            <input type="hidden" name="_token" value="lk37akNkoZ6kc7f1IYR9PygfOw6mADDbMmWraumb">
-                            <div class="form-group">
-                                <textarea class="form-control" rows="4" name="additional_notes" placeholder="Write your message here..."></textarea>
-                            </div>
-                        </form>
-                    </div>
+
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-12 text-right">
                 <div class="navigation">
-                    <a href="https://appointo.froid.works/cart" class="btn btn-custom btn-dark"><i class="fa fa-angle-left mr-2"></i>Go Back</a>
-                    <a href="javascript:;" onclick="saveBooking();" class="btn btn-custom btn-dark">
-                        Proceed To Payment <i class="fa fa-angle-right ml-1"></i>
+                    <a href="{{ route("web") }}" class="btn btn-custom btn-dark">
+                        Continue Booking <i class="fa fa-angle-right ml-1"></i>
                     </a>
                 </div>
             </div>

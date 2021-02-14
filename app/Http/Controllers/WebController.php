@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Service;
 use App\Models\ServiceBooking;
 use App\Models\ServiceCategory;
@@ -93,20 +94,35 @@ class WebController extends Controller
             ]);
 
             $booking = $customer->newBooking($service, $service->interval_start_date, $service->interval_end_date);
-
-
-            Flash::success("Booking successfuly initiated");
-            return   redirect()->back()->withInput();
+        } else {
+            $booking = $customer->newBooking($service, $service->interval_start_date, $service->interval_end_date);
         }
-        $booking = $customer->newBooking($service, $service->interval_start_date, $service->interval_end_date);
+
         if ($request->notes) {
             $booking->notes = $request->notes;
             $booking->save();
         }
 
 
-        Flash::error("Phone number already exists, login or use another phone number");
+        Flash::success("Thank you for booking with us, you will hear from us soon, using Phone contact");
 
-        return redirect()->back()->withInput();
+        return redirect()->route("web.checkout", $booking);
+    }
+
+
+    public function checkout(ServiceBooking $serviceBooking)
+    {
+        Flash::success("Thank you for booking with us, you will hear from us soon, using Phone contact");
+
+        $booking = $serviceBooking;
+        return view("web.checkout", compact("booking"));
+    }
+
+
+    public function serviceCategory(ServiceCategory $serviceCategory)
+    {
+        return view("web.search", [
+            "services" => $serviceCategory->services
+        ]);
     }
 }

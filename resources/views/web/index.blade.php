@@ -86,7 +86,7 @@
             @foreach($categories as $key => $category)
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12 mb-30 categories-list" data-category-id="2">
                 <div class="ctg-item" style="background-image:url({{ asset('/assets/img/WebServices.jpg') }})">
-                    <a href="#">
+                    <a href="{{ route("web.serviceCategory", $category) }}">
                         <div class="icon-box">
                             <i class="flaticon-fork"></i>
                         </div>

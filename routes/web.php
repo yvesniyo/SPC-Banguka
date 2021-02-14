@@ -33,13 +33,12 @@ Route::group(["prefix" => ""], function () {
     Route::get("/search", [WebController::class, "search"])->name("web.search");
     Route::get("/contact-us", [WebController::class, "contactUs"])->name("web.contactUs");
     Route::get("/about-us", [WebController::class, "aboutUs"])->name("web.aboutUs");
+    Route::get("/serviceCategory/{serviceCategory}", [WebController::class, "serviceCategory"])->name("web.serviceCategory");
+    Route::get("/checkout/{serviceBooking}", [WebController::class, "checkout"])->name("web.checkout");
     Route::get("/booking/{service}", [WebController::class, "booking"])->name("web.booking");
     Route::post("/booking/{service}/save", [WebController::class, "saveBooking"])->name("web.booking.save");
     Route::get("/privacy-policy", [WebController::class, "privacyPolicy"])->name("web.privacyPolicy");
 });
-
-
-
 
 
 
