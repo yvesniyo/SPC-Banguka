@@ -87,9 +87,8 @@
                 @if(old("dateRange"))
                 <input type="text" value="{{ old("dateRange") }}" name="dateRange" class="form-control daterange-cus">
                 @else
-                <input type="text" value="{{ $service->start_date }} - {{ $service->end_date }} " name="dateRange" class="form-control daterange-cus">
+                <input type="text" value="{{ $service->start_date ?? '' }} - {{ $service->end_date ?? '' }} " name="dateRange" class="form-control daterange-cus">
                 @endif
-
             </div>
         </div>
         <!-- Status Field -->
