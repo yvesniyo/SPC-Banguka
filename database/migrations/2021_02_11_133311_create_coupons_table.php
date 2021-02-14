@@ -22,7 +22,7 @@ class CreateCouponsTable extends Migration
             $table->date('end_date');
             $table->string('amount');
             $table->enum('amount_type', ["Percent", "Fixed"])->default("Percent");
-            $table->enum('status', Coupon::COUPON_STATUSES)->default(Coupon::STATUS_ACTIVE);
+            $table->enum('status', Coupon::STATUSES)->default(Coupon::STATUS_ACTIVE);
             $table->timestamps();
             $table->softDeletes();
         });

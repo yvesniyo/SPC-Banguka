@@ -18,7 +18,7 @@ class CreateServiceCategoriesTable extends Migration
         Schema::create('service_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('status', ServiceCategory::SERVICE_CATEGORY_STATUSES)
+            $table->enum('status', ServiceCategory::STATUSES)
                 ->default(ServiceCategory::STATUS_ACTIVE);
             $table->timestamps();
             $table->softDeletes();

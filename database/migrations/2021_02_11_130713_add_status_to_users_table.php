@@ -15,7 +15,7 @@ class AddStatusToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->enum("status", [User::USERS_STATUSES])->default(User::STATUS_ACTIVE);
+            $table->enum("status", [User::STATUSES])->default(User::STATUS_ACTIVE);
         });
     }
 
