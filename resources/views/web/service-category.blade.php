@@ -55,12 +55,13 @@
                             <ul class="ctg-info centering h-center v-center">
                                 <li class="mt-1">
                                     <div class="service-price">
-                                        {{ $service->price }} <span class="unit">$</span>
+                                        {{ format_money($service->real_price) }}
+
                                     </div>
                                 </li>
                                 <li class="mt-1">
                                     <div class="dropdown add-items">
-                                        ic<a href="{{ route("web.booking", $service) }}" class="btn-custom btn-blue dropdown-toggle add-to-cart" data-service-price="30" data-service-id="7" data-service-name="Deep Tissue Massage" aria-expanded="false">
+                                        <a href="{{ route("web.booking", $service) }}" class="btn-custom btn-blue dropdown-toggle add-to-cart" data-service-price="30" data-service-id="7" data-service-name="Deep Tissue Massage" aria-expanded="false">
                                             Book <span class="fa fa-forward"></span>
                                         </a>
                                     </div>

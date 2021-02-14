@@ -142,7 +142,7 @@
                         <ul class="ctg-info centering h-center v-center">
                             <li class="mt-1">
                                 <div class="service-price">
-                                    {{ $service->price }} <span class="unit">Rwf</span>
+                                    {{ format_money($service->real_price) }}
                                 </div>
                             </li>
                             <li class="mt-1">
