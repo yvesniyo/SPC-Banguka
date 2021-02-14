@@ -87,7 +87,15 @@
                 @if(old("dateRange"))
                 <input type="text" value="{{ old("dateRange") }}" name="dateRange" class="form-control daterange-cus">
                 @else
-                <input type="text" value="{{ $service->start_date ?? '' }} - {{ $service->end_date ?? '' }} " name="dateRange" class="form-control daterange-cus">
+                @php
+                $dates = $service->start_date ?? false;
+
+                @endphp
+                @if($dates)
+                <input type="text" value="{{ $service->start_date  }} - {{ $service->end_date  }} " name="dateRange" class="form-control daterange-cus">
+                @else
+                <input type="text" name="dateRange" class="form-control daterange-cus">
+                @endif
                 @endif
             </div>
         </div>
