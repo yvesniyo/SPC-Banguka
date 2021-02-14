@@ -18,7 +18,7 @@ class CreateCustomersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->nullable();
-            $table->text("password")->default('$2y$10$JvbJj5QqTqGsL5uR3oo/luX8KdLR1i0VH.VEhozAd2vCLEzZsV8TO');
+            $table->string("password")->default('$2y$10$JvbJj5QqTqGsL5uR3oo/luX8KdLR1i0VH.VEhozAd2vCLEzZsV8TO');
             $table->string('phone');
             $table->timestamps();
             $table->softDeletes();
