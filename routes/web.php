@@ -5,7 +5,6 @@ use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WebController;
-use App\Models\ServiceBooking;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,11 +20,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Auth::routes();
+Auth::routes([
+    'register' => false, // Registration Routes...
+    'reset' => false, // Password Reset Routes...
+    'verify' => false, // Email Verification Routes...
+]);
 
 Route::get("/guest/login", [CustomerAuthController::class, "loginForm"])->name("guest.login");
 
-// dd(ServiceBooking::with(["bookable", "customer"])->get());
 
 
 Route::group(["prefix" => ""], function () {
@@ -42,8 +44,9 @@ Route::group(["prefix" => ""], function () {
 
 
 
-Route::group(["prefix" => "dashboard"], function () {
+Route::group(["prefix" => "dashboard", "middleware" => "auth"], function () {
 
+    Route::get("/logout", [App\Http\Controllers\DashboardController::class, "logout"])->name("dashboard.logout");
     Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
     Route::get("/bookingCalendar", [BookingController::class, "calendar"])->name("booking.calendar");
 

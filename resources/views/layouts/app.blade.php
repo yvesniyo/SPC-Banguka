@@ -161,7 +161,7 @@
                                 <i class="fas fa-bolt"></i> Visit Web
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item has-icon text-danger">
+                            <a href="{{ route("dashboard.logout") }}" class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
                         </div>

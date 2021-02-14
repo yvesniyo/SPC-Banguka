@@ -8,6 +8,7 @@ use App\Models\Earning;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 class DashboardController extends Controller
@@ -128,5 +129,13 @@ class DashboardController extends Controller
             "chart_height" => "50px",
         ];
         return new LaravelChart($chart_options);
+    }
+
+
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route("login");
     }
 }
