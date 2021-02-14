@@ -68,4 +68,9 @@ class Role extends Model
     {
         return $this->hasMany(\App\Models\User::class, 'role_id');
     }
+
+    public static function htmlSelectIdName()
+    {
+        return self::query()->select("id", "name")->pluck("name", "id");
+    }
 }

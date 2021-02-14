@@ -6,8 +6,8 @@
 
 <!-- Role Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('role_id', 'Role Id:') !!}
-    {!! Form::number('role_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('role_id', 'Role:') !!}
+    {!! Form::select('role_id', $roles, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Email Field -->
@@ -16,24 +16,20 @@
     {!! Form::email('email', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 
-<!-- Email Verified At Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('email_verified_at', 'Email Verified At:') !!}
-    {!! Form::text('email_verified_at', null, ['class' => 'form-control','id'=>'email_verified_at']) !!}
-</div>
 
 @push('scripts')
-   <script type="text/javascript">
-           $('#email_verified_at').datetimepicker({
-               format: 'YYYY-MM-DD HH:mm:ss',
-               useCurrent: true,
-               icons: {
-                   up: "icon-arrow-up-circle icons font-2xl",
-                   down: "icon-arrow-down-circle icons font-2xl"
-               },
-               sideBySide: true
-           })
-       </script>
+<script type="text/javascript">
+    $('#email_verified_at').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm:ss'
+        , useCurrent: true
+        , icons: {
+            up: "icon-arrow-up-circle icons font-2xl"
+            , down: "icon-arrow-down-circle icons font-2xl"
+        }
+        , sideBySide: true
+    })
+
+</script>
 @endpush
 
 
@@ -43,16 +39,11 @@
     {!! Form::password('password', ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 
-<!-- Remember Token Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('remember_token', 'Remember Token:') !!}
-    {!! Form::text('remember_token', null, ['class' => 'form-control','maxlength' => 100,'maxlength' => 100]) !!}
-</div>
 
 <!-- Status Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('status', 'Status:') !!}
-    {!! Form::text('status', null, ['class' => 'form-control']) !!}
+    {!! Form::select('status', boolStatus(), null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Submit Field -->

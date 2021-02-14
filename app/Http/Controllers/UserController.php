@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\UserRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Role;
 use Response;
 
 class UserController extends AppBaseController
@@ -39,7 +40,8 @@ class UserController extends AppBaseController
      */
     public function create()
     {
-        return view('users.create');
+        $roles = Role::htmlSelectIdName();
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -96,8 +98,9 @@ class UserController extends AppBaseController
 
             return redirect(route('users.index'));
         }
+        $roles = Role::htmlSelectIdName();
 
-        return view('users.edit')->with('user', $user);
+        return view('users.edit', compact('roles'))->with('user', $user);
     }
 
     /**
