@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Earning extends Model
 {
     use HasFactory;
+
+    public const STATUS_ACTIVE = "active";
+    public const STATUS_INACTIVE = "inactive";
+    public const STATUSES = [
+        self::STATUS_ACTIVE,
+        self::STATUS_INACTIVE
+    ];
 }

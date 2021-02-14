@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WebController;
+use App\Models\ServiceBooking;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,44 +20,42 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
+Route::get("/guest/login", [CustomerAuthController::class, "loginForm"])->name("guest.login");
 
-Route::get("/profile", [ProfileController::class, "edit"])->name("profile.edit");
-Route::put("/profile", [ProfileController::class, "update"])->name("profile.update");
-Route::get("/bookingCalendar", [BookingController::class, "calendar"])->name("booking.calendar");
+// dd(ServiceBooking::with(["bookable", "customer"])->get());
 
 
-
-Route::get("/web", [WebController::class, "index"])->name("web");
-Route::get("/web/contact-us", [WebController::class, "contactUs"])->name("web.contactUs");
-Route::get("/web/about-us", [WebController::class, "aboutUs"])->name("web.aboutUs");
-Route::get("/web/privacy-policy", [WebController::class, "privacyPolicy"])->name("web.privacyPolicy");
-
-
-
-
+Route::group(["prefix" => ""], function () {
+    Route::get("", [WebController::class, "index"])->name("web");
+    Route::get("/search", [WebController::class, "search"])->name("web.search");
+    Route::get("/contact-us", [WebController::class, "contactUs"])->name("web.contactUs");
+    Route::get("/about-us", [WebController::class, "aboutUs"])->name("web.aboutUs");
+    Route::get("/booking/{service}", [WebController::class, "booking"])->name("web.booking");
+    Route::post("/booking/{service}/save", [WebController::class, "saveBooking"])->name("web.booking.save");
+    Route::get("/privacy-policy", [WebController::class, "privacyPolicy"])->name("web.privacyPolicy");
+});
 
 
 
 
 
-Route::resource('coupons', App\Http\Controllers\CouponController::class);
 
-Route::resource('services', App\Http\Controllers\ServiceController::class);
+Route::group(["prefix" => "dashboard"], function () {
 
-Route::resource('serviceCategories', App\Http\Controllers\ServiceCategoryController::class);
-
-Route::resource('customers', App\Http\Controllers\CustomerController::class);
-
-Route::resource('roles', App\Http\Controllers\RoleController::class);
-
-Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
+    Route::get("/bookingCalendar", [BookingController::class, "calendar"])->name("booking.calendar");
 
 
-Route::resource('bookings', App\Http\Controllers\BookingController::class);
+    Route::resource('coupons', App\Http\Controllers\CouponController::class);
+    Route::resource('services', App\Http\Controllers\ServiceController::class);
+    Route::resource('serviceCategories', App\Http\Controllers\ServiceCategoryController::class);
+    Route::resource('customers', App\Http\Controllers\CustomerController::class);
+    Route::resource('roles', App\Http\Controllers\RoleController::class);
+    Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::resource('bookings', App\Http\Controllers\BookingController::class);
+    Route::resource("settings", SettingsController::class);
+    Route::resource("profile", ProfileController::class);
+});

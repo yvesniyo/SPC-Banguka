@@ -30,7 +30,7 @@ class ServiceDataTable extends DataTable
      */
     public function query(Service $model)
     {
-        return $model->newQuery()->with(["service_category", "employee"]);
+        return $model->newQuery()->with(["serviceCategory", "employee"]);
     }
 
     /**
@@ -68,21 +68,19 @@ class ServiceDataTable extends DataTable
         return [
             'name',
             'service_category_id' => new Column([
-                "name" => "Category",
+                "name" => "service_category.name",
                 "title" => "Category",
                 "data" => "service_category.name"
             ]),
-            'price',
+            'real_price',
             'employee_id' => new Column([
-                "name" => "Employee",
+                "name" => "employee.name",
                 "title" => "Employee",
                 "data" => "employee.name"
             ]),
             'status',
-            'description',
-            'slug',
-            'discount',
-            'time_required',
+            'discount_format',
+            'interval',
         ];
     }
 

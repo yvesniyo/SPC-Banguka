@@ -1,4 +1,5 @@
-@extends('web.index')
+@extends('web.master')
+
 
 @section('content')
 

@@ -31,6 +31,12 @@ class Customer extends Model
     protected $dates = ['deleted_at'];
 
 
+    public const STATUS_ACTIVE = "active";
+    public const STATUS_INACTIVE = "inactive";
+    public const STATUSES = [
+        self::STATUS_ACTIVE,
+        self::STATUS_INACTIVE
+    ];
 
     public $fillable = [
         'name',
@@ -50,6 +56,8 @@ class Customer extends Model
         'phone' => 'string'
     ];
 
+    protected $hidden = ["password"];
+
     /**
      * Validation rules
      *
@@ -57,7 +65,7 @@ class Customer extends Model
      */
     public static $rules = [
         'name' => 'required|string|max:255',
-        'email' => 'required|string|max:255',
+        'email' => 'string|max:255',
         'phone' => 'required|string|max:255',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
@@ -68,5 +76,10 @@ class Customer extends Model
     public static function getBookingModel(): string
     {
         return ServiceBooking::class;
+    }
+
+    public static function htmlSelectIdName()
+    {
+        return self::query()->select("id", "name")->pluck("name", "id");
     }
 }

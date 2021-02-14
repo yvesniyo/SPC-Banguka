@@ -21,14 +21,19 @@ class Role extends Model
     use HasFactory;
 
     public $table = 'roles';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
 
     protected $dates = ['deleted_at'];
 
-
+    public const STATUS_ACTIVE = "active";
+    public const STATUS_INACTIVE = "inactive";
+    public const STATUSES = [
+        self::STATUS_ACTIVE,
+        self::STATUS_INACTIVE
+    ];
 
     public $fillable = [
         'name'

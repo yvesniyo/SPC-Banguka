@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Booking;
+use App\Models\ServiceBooking;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
@@ -30,7 +31,7 @@ class BookingDataTable extends DataTable
      */
     public function query(Booking $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(["bookable", "customer"]);
     }
 
     /**
@@ -68,8 +69,8 @@ class BookingDataTable extends DataTable
         return [
             'bookable_id' => new Column([
                 "title" => "Service",
-                'data' => "service.name",
-                "name" => "service.name",
+                'data' => "bookable.name",
+                "name" => "bookable.name",
             ]),
             'customer_id' => new Column([
                 "title" => "Customer",

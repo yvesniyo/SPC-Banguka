@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
 
-    <link type="text/css" rel="stylesheet" href="https://appointo.froid.works/assets/css/front-styles.css">
+    <link type="text/css" rel="stylesheet" href="{{ asset("/assets/css/web_front-styles.css") }} ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -30,10 +30,10 @@
         }
 
     </style>
-    <link type="text/css" rel="stylesheet" href="https://appointo.froid.works/assets/css/style.css">
-    <link type="text/css" rel="stylesheet" href="https://appointo.froid.works/assets/css/select2.min.css">
-    <link type="text/css" rel="stylesheet" href="https://appointo.froid.works/assets/css/responsive.css">
-    <link type="text/css" rel="stylesheet" href="https://appointo.froid.works/front-assets/css/helper.css">
+    <link type="text/css" rel="stylesheet" href="{{ asset("/assets/css/web_style.css")}} ">
+    <link type="text/css" rel="stylesheet" href="{{ asset("/assets/css/web_select2.min.css")}}">
+    <link type=" text/css" rel="stylesheet" href="{{ asset("/assets/css/web_responsive.css")}} ">
+    <link type="text/css" rel="stylesheet" href="{{ asset("/assets/css/web_helper.css")}} ">
 
     <style>
         :root {
@@ -41,9 +41,19 @@
             --dark-primary-color: #414552;
         }
 
-    </style>
-</head>
+        .topbar .logo::before,
+        .topbar .logo::after {
+            background: var(--dark-primary-color);
 
+        }
+
+    </style>
+
+    @stack('css')
+</head>
+@php
+$settings = settings();
+@endphp
 
 <body style="">
 
@@ -55,11 +65,42 @@
                         <ul class="head-contact-left">
                             <li>
                                 <i class="fa fa-phone"></i>
-                                +1234512345
+                                {{ $settings->company_phone }}
                             </li>
 
+                            <li>
+                                <i class="fa fa-envelope"></i>
+                                {{ $settings->company_email }}
+
+                            </li>
+
+
+
+
+
+                        </ul>
+
+
+
+                    </div>
+                    <div class="col-lg-8 col-12 my-lg-0 my-2">
+                        <ul class="head-contact-right">
+                            <li class="language-drop mb-3">
+                                <div class="dropdown">
+                                    <a href="#" class="dropdown-toggle text-capitalize" data-toggle="dropdown">
+                                        <i class="fa fa-globe"></i> Language </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item active" data-lang-code="en" href="javascript:;">English</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="mb-3">
+                                <a href="{{ route("guest.login") }}">
+                                    <i class="fa fa-user mr-2"> </i>Sign In </a>
+                            </li>
                         </ul>
                     </div>
+
 
                 </div>
             </div>
@@ -69,15 +110,15 @@
                 <div class="row h-center">
                     <div class="col-lg-5 col-md-3 col-12">
                         <div class="logo">
-                            <a href="https://appointo.froid.works" class="text-white">
-                                {{ config("app.name") }}
+                            <a href="{{ route("web") }}" class="text-white">
+                                <img src="{{ asset("/assets/img/spc_logo.png") }}" style="height:100px;" class=" w-auto" />
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-9 col-12">
                         <ul class="d-flex h-center justify-content-md-end py-3 ml-md-5 ml-0">
                             <li class="search-form">
-                                <form id="searchForm" action="https://appointo.froid.works/search" method="GET">
+                                <form id="searchForm" action="{{ route("web.search") }}" method="GET">
                                     <span class="input-wrap">
                                         <i class="fa fa-search"></i>
                                         <input type="text" class="form-control" name="search_term" id="search_term" placeholder="Search Services Here" autocomplete="none">
@@ -112,22 +153,23 @@
                                     <div class="f-content">
                                         <i class="fa fa-map-marker"></i>
                                         <p>
-                                            <strong>Froiden Technologies Pvt Ltd</strong>
+                                            <strong> {{ $settings->company_name }}</strong>
+
                                         </p>
-                                        <p>Jaipur, India</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-6 col-12 mb-30">
-                                    <div class="f-content">
-                                        <i class="fa fa-phone"></i>
-                                        1234512345
+                                        <p> {{ $settings->company_location }}</p>
 
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-6 col-12 mb-30">
                                     <div class="f-content">
+                                        <i class="fa fa-phone"></i>
+                                        {{ $settings->company_phone }}
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-12 mb-30">
+                                    <div class="f-content">
                                         <i class="fa fa-envelope"></i>
-                                        <a href="mailto:company@example.com">company@example.com</a>
+                                        <a href="mailto:{{ $settings->company_email }}">{{ $settings->company_email }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +187,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        © Froiden Technologies Pvt Ltd 2021
+                        © {{ $settings->company_name }} 2021
                     </div>
                 </div>
             </div>
@@ -172,35 +214,25 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+    <script src="{{ asset("/assets/js/core/jquery.min.js") }}"></script>
+    <script src="{{ asset("/assets/js/core/bootstrap.min.js") }}"></script>
 
 
-    <!-- Location Modal Start -->
-    <div class="header_location_modal modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-right: 0px !important" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog" style="max-width: 100%;margin: 0;">
-            <div class="modal-content">
-                <div class="modal-body text-center p-5">
-                    <h4>Pick a City</h4>
-                    <small class="text-muted">To find awesome offers around you</small>
-                    <div class="locationPlaces mt-5">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Location Modal End -->
 
 
 
     <script>
         $(function() {
-            toastr.options = {
+            /*toastr.options = {
                 "progressBar": true
                 , "positionClass": "toast-bottom-right"
                 , "preventDuplicates": true
-            };
+            };*/
         });
 
     </script>
+
+    @stack('js')
 
 
 

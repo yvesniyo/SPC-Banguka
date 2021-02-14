@@ -12,6 +12,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Models\ServiceCategory;
 use App\Repositories\ServiceCategoryRepository;
 use App\Models\User;
+use Carbon\Carbon;
 use Response;
 
 class ServiceController extends AppBaseController
@@ -47,6 +48,18 @@ class ServiceController extends AppBaseController
         return view('services.create', compact("categories", 'employees'));
     }
 
+
+    public function serviceRequestCreateUpdate(&$input)
+    {
+        [$startDate, $endDate] = explode(" - ", $input["dateRange"]);
+        $input["start_date"] = Carbon::parse($startDate);
+        $input["end_date"] = Carbon::parse($endDate);
+        $input["time_required"] = Carbon::parse($startDate)->diffInDays(Carbon::parse($endDate));
+        $input["time_required_type"] = "days";
+        $input["real_price"] = $input["price"];
+        $input["price"] = $input["real_price"] /  $input["time_required"];
+    }
+
     /**
      * Store a newly created Service in storage.
      *
@@ -58,7 +71,15 @@ class ServiceController extends AppBaseController
     {
         $input = $request->all();
 
+        $this->serviceRequestCreateUpdate($input);
+
+
+
+
+
         $service = $this->serviceRepository->create($input);
+
+        $service->addMedia($request->file('image'))->toMediaCollection('images');
 
         Flash::success('Service saved successfully.');
 
@@ -127,7 +148,10 @@ class ServiceController extends AppBaseController
             return redirect(route('services.index'));
         }
 
-        $service = $this->serviceRepository->update($request->all(), $id);
+        $input = $request->all();
+        $this->serviceRequestCreateUpdate($input);
+
+        $service = $this->serviceRepository->update($input, $id);
 
         Flash::success('Service updated successfully.');
 

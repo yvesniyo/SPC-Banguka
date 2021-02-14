@@ -23,77 +23,102 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $currency
  * @property string $notes
  */
-class Booking extends Model
+class Booking extends ServiceBooking
 {
     use SoftDeletes;
 
     use HasFactory;
 
     public $table = 'bookable_bookings';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
 
     protected $dates = ['deleted_at'];
 
+    public const STATUS_PENDING = "pending";
+    public const STATUS_COMPLETED = "completed";
+    public const STATUS_INPROGRESS = "inprogress";
+    public const STATUS_CANCELLED = "cancelled";
+    public const STATUSES = [
+        self::STATUS_PENDING,
+        self::STATUS_CANCELLED,
+        self::STATUS_COMPLETED,
+        self::STATUS_INPROGRESS
+    ];
 
 
-    public $fillable = [
+
+
+
+    /**
+     * {@inheritdoc}
+     */
+    protected $fillable = [
         'bookable_id',
+        'bookable_type',
         'customer_id',
+        'customer_type',
         'starts_at',
         'ends_at',
-        'canceled_at',
-        'timezone',
         'price',
         'quantity',
         'total_paid',
         'currency',
-        'notes'
+        'formula',
+        'canceled_at',
+        'options',
+        'notes',
     ];
 
     /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
+     * {@inheritdoc}
      */
     protected $casts = [
-        'id' => 'integer',
         'bookable_id' => 'integer',
+        'bookable_type' => 'string',
         'customer_id' => 'integer',
+        'customer_type' => 'string',
         'starts_at' => 'datetime',
         'ends_at' => 'datetime',
-        'canceled_at' => 'datetime',
-        'timezone' => 'string',
-        'price' => 'decimal:2',
+        'price' => 'float',
         'quantity' => 'integer',
-        'total_paid' => 'decimal:2',
+        'total_paid' => 'float',
         'currency' => 'string',
-        'notes' => 'string'
+        'formula' => 'json',
+        'canceled_at' => 'datetime',
+        'options' => 'array',
+        'notes' => 'string',
     ];
 
     /**
-     * Validation rules
+     * {@inheritdoc}
+     */
+    protected $observables = [
+        'validating',
+        'validated',
+    ];
+
+    /**
+     * The default rules that the model will validate against.
      *
      * @var array
      */
-    public static $rules = [
-        'bookable_id' => 'required',
-        'customer_id' => 'required',
-        'starts_at' => 'nullable',
-        'ends_at' => 'nullable',
-        'canceled_at' => 'nullable',
-        'timezone' => 'nullable|string|max:255',
+    protected $rules = [
+        'bookable_id' => 'required|integer',
+        'bookable_type' => 'required|string|strip_tags|max:150',
+        'customer_id' => 'required|integer',
+        'customer_type' => 'required|string|strip_tags|max:150',
+        'starts_at' => 'required|date',
+        'ends_at' => 'required|date',
         'price' => 'required|numeric',
         'quantity' => 'required|integer',
         'total_paid' => 'required|numeric',
-        'currency' => 'required|string|max:3',
-        'notes' => 'nullable|string',
-        'created_at' => 'nullable',
-        'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
+        'currency' => 'required|alpha|size:3',
+        'formula' => 'nullable|array',
+        'canceled_at' => 'nullable|date',
+        'options' => 'nullable|array',
+        'notes' => 'nullable|string|strip_tags|max:32768',
     ];
-
-    
 }

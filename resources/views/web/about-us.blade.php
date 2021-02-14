@@ -1,4 +1,5 @@
-@extends('web.index')
+@extends('web.master')
+
 
 @section('content')
 <div class="container pt-5 pb-5">

@@ -94,6 +94,14 @@ class User extends Authenticatable
         'status' => 'required|string'
     ];
 
+
+    public const STATUS_ACTIVE = "active";
+    public const STATUS_INACTIVE = "inactive";
+    public const STATUSES = [
+        self::STATUS_ACTIVE,
+        self::STATUS_INACTIVE
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/

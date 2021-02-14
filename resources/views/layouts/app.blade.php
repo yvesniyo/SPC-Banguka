@@ -16,7 +16,7 @@
 
     <!-- CSS Libraries -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.23.0/slimselect.min.css" rel="stylesheet">
-    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"> --}}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css">
 
 
@@ -28,6 +28,7 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@icon/coreui-icons-free@1.0.1-alpha.1/coreui-icons-free.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css">
 
@@ -54,6 +55,77 @@
             font-size: 13px;
         }
 
+        .ss-main .ss-single-selected {
+
+            padding: 0px;
+            padding-bottom: 4px;
+            border: 0px solid #dcdee2;
+            border-radius: 0px;
+            background-color: transparent !important;
+
+        }
+
+        .ss-main .ss-content {
+            margin-left: -15px;
+            border-color: #e4e6fc;
+
+        }
+
+        .card.card-statistic-1 .card-header,
+        .card.card-statistic-2 .card-header {
+            padding-bottom: 0;
+            padding-top: 7px;
+        }
+
+        .card.card-statistic-1 .card-icon {
+            line-height: 60px;
+        }
+
+        .card.card-statistic-1 .card-icon,
+        .card.card-statistic-2 .card-icon {
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+            border-radius: 3px;
+            line-height: 60px;
+            text-align: center;
+            float: left;
+            margin-right: 15px;
+        }
+
+        .card.card-statistic-1 .card-header h4,
+        .card.card-statistic-2 .card-header h4 {
+            font-weight: 400;
+            font-size: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .card.card-statistic-1 .card-header,
+        .card.card-statistic-2 .card-header {
+            padding-right: 0;
+        }
+
+
+        div.card-body div.form-group {
+            border: 0px solid #d3d3d347;
+            margin-bottom: 25px;
+            padding-left: 8px;
+            padding-top: 10px;
+            padding-right: 8px;
+        }
+
+        .navbar {
+            left: 210px;
+        }
+
+        .main-sidebar {
+            width: 200px;
+        }
+
+        .main-content {
+            padding-left: 230px;
+        }
+
     </style>
 
     @stack('css')
@@ -71,26 +143,22 @@
                         <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
                     </ul>
                     <div class="search-element">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250">
-                        <button class="btn" type="submit"><i class="fas fa-search"></i></button>
-                        <div class="search-backdrop"></div>
-                        <div class="search-result">
 
-                        </div>
                     </div>
                 </form>
                 <ul class="navbar-nav navbar-right">
 
                     <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+                            <img alt="image" src="{{ asset("assets/img/avatar/avatar-1.png") }}" class="rounded-circle mr-1">
+
                             <div class="d-sm-none d-lg-inline-block">{{ Auth::user()->name }}</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="{{ route("profile.edit") }}" class="dropdown-item has-icon">
+                            <a href="{{ route("profile.edit", auth()->id()) }}" class="dropdown-item has-icon">
                                 <i class="far fa-user"></i> Profile
                             </a>
-                            <a href="features-activities.html" class="dropdown-item has-icon">
-                                <i class="fas fa-bolt"></i> Activities
+                            <a href="{{ route("web") }}" class="dropdown-item has-icon">
+                                <i class="fas fa-bolt"></i> Visit Web
                             </a>
                             <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item has-icon text-danger">

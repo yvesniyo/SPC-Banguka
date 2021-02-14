@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Rinvex\Bookings\Models\BookableAvailability;
 use Rinvex\Bookings\Models\BookableRate;
 use Rinvex\Bookings\Traits\Bookable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Class Service
@@ -28,11 +30,11 @@ use Rinvex\Bookings\Traits\Bookable;
  * @property integer $time_required
  * @property string $time_required_type
  */
-class Service extends Model
+class Service extends Model implements HasMedia
 {
     use SoftDeletes;
 
-    use HasFactory, Bookable;
+    use HasFactory, Bookable, InteractsWithMedia;
 
     public $table = 'services';
 
@@ -40,7 +42,14 @@ class Service extends Model
     const UPDATED_AT = 'updated_at';
 
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'start_date', 'end_date'];
+
+    public const STATUS_ACTIVE = "active";
+    public const STATUS_INACTIVE = "inactive";
+    public const STATUSES = [
+        self::STATUS_ACTIVE,
+        self::STATUS_INACTIVE
+    ];
 
 
 
@@ -54,6 +63,9 @@ class Service extends Model
         'slug',
         'discount',
         'discount_type',
+        'real_price',
+        'end_date',
+        'start_date',
         'time_required',
         'time_required_type'
     ];
@@ -87,18 +99,23 @@ class Service extends Model
         'name' => 'required|string|max:255',
         'service_category_id' => 'required',
         'price' => 'required|string|max:255',
-        'employee_id' => 'required',
+        'employee_id' => 'nullable',
         'status' => 'required|string',
-        'description' => 'required|string',
+        'description' => 'nullable',
         'slug' => 'required|string|max:255',
         'discount' => 'required|string|max:255',
         'discount_type' => 'required|string',
-        'time_required' => 'required|integer',
-        'time_required_type' => 'required|string',
+        'time_required' => 'nullable|integer',
+        'time_required_type' => 'nullable|string',
+        'dateRange' => "required|string",
+        'image' =>  'nullable|image|mimes:jpeg,jpg,png,gif|max:10000',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
     ];
+
+
+    protected $appends = ["discount_format", 'interval', 'interval_date_string', 'interval_start_date', 'interval_end_date'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -130,5 +147,70 @@ class Service extends Model
     public static function getRateModel(): string
     {
         return BookableRate::class;
+    }
+
+
+    public function getDiscountFormatAttribute()
+    {
+        return $this->discount . " " . ($this->discount_type == "Percent" ? " % " : " Fixed ");
+    }
+
+    public function getIntervalAttribute()
+    {
+        return $this->time_required . " " . ($this->time_required_type);
+    }
+
+
+    public function getIntervalDateStringAttribute()
+    {
+        $start =  $this->interval_start_date;
+        $end   =  $this->interval_end_date;
+
+        return $start->format("l M-Y") . " - " . $end->format("l M-Y");
+    }
+
+    public function getIntervalStartDateAttribute()
+    {
+        return  $this->start_date;
+    }
+
+
+    public function getIntervalEndDateAttribute()
+    {
+        $start =  $this->interval_start_date;
+        switch (strtolower($this->time_required_type)) {
+            case 'days':
+                $end = $start->addDays($this->time_required);
+                break;
+
+            case 'weeks':
+                $end = $start->addWeeks($this->time_required);
+                break;
+            case 'months':
+                $end = $start->addMonths($this->time_required);
+                break;
+
+            default:
+                $end = $start->addDays($this->time_required);
+                break;
+        }
+
+        return $end;
+    }
+
+
+    public function getBaseCostAttribute()
+    {
+        return 0;
+    }
+
+    public function getUnitCostAttribute()
+    {
+        return (float) $this->price;
+    }
+
+    public static function htmlSelectIdName()
+    {
+        return self::query()->select("id", "name")->pluck("name", "id");
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Customer;
+use App\Models\Earning;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,9 +29,24 @@ class DashboardController extends Controller
         $totalEmployees = User::where("role_id", 2)->count();
         $totalBookings = 0;
 
+        $bookings = Booking::with(["bookable", "customer"])->limit(10)->latest()->get();
+
+
+        $completeBookings = Booking::select("id")->where("status", Booking::STATUS_COMPLETED)->count();
+        $pendingBookings = Booking::select("id")->where("status", Booking::STATUS_PENDING)->count();
+        $cancelledBookings = Booking::select("id")->where("status", Booking::STATUS_CANCELLED)->count();
+        $inProgressBookings = Booking::select("id")->where("status", Booking::STATUS_INPROGRESS)->count();
+
+        $totalEarnings = Earning::selectRaw("sum(amount) as total_amount ")->first()->total_amount;
 
 
         return view("home", compact(
+            'totalEarnings',
+            'completeBookings',
+            'pendingBookings',
+            'cancelledBookings',
+            'inProgressBookings',
+            'bookings',
             'earningsByMonth',
             'refererUrl',
             "servicesByMonth",

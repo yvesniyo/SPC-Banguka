@@ -3,7 +3,7 @@ let allHtmlSelectOptions = document.querySelectorAll("select");
 allHtmlSelectOptions.forEach(select => {
     let className = makeid(15);
     select.classList.add(className);
-    select.classList.remove("form-control");
+    // select.classList.remove("form-control");
     select.classList.remove("form-select");
     new SlimSelect({
         select: '.' + className

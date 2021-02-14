@@ -1,13 +1,13 @@
 <!-- Bookable Id Field -->
 <div class="form-group">
-    {!! Form::label('bookable_id', 'Bookable Id:') !!}
-    <p>{{ $booking->bookable_id }}</p>
+    {!! Form::label('bookable_id', 'Service:') !!}
+    <p>{{ $booking->bookable->name }}</p>
 </div>
 
 <!-- Customer Id Field -->
 <div class="form-group">
-    {!! Form::label('customer_id', 'Customer Id:') !!}
-    <p>{{ $booking->customer_id }}</p>
+    {!! Form::label('customer_id', 'Customer:') !!}
+    <p>{{ $booking->customer->name }}</p>
 </div>
 
 <!-- Starts At Field -->
@@ -37,7 +37,8 @@
 <!-- Price Field -->
 <div class="form-group">
     {!! Form::label('price', 'Price:') !!}
-    <p>{{ $booking->price }}</p>
+    <p>{{ $booking->price }} {{ $booking->currency }}</p>
+
 </div>
 
 <!-- Quantity Field -->
@@ -49,18 +50,13 @@
 <!-- Total Paid Field -->
 <div class="form-group">
     {!! Form::label('total_paid', 'Total Paid:') !!}
-    <p>{{ $booking->total_paid }}</p>
+    <p>{{ $booking->total_paid }} {{ $booking->currency }}</p>
+
 </div>
 
-<!-- Currency Field -->
-<div class="form-group">
-    {!! Form::label('currency', 'Currency:') !!}
-    <p>{{ $booking->currency }}</p>
-</div>
 
 <!-- Notes Field -->
 <div class="form-group">
     {!! Form::label('notes', 'Notes:') !!}
     <p>{{ $booking->notes }}</p>
 </div>
-

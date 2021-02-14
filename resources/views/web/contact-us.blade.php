@@ -1,4 +1,5 @@
-@extends('web.index')
+@extends('web.master')
+
 
 @section('content')
 <div class="container pt-5 pb-5">
@@ -18,22 +19,27 @@
         <hr>
         <div class="row">
             <form class="contact-form col-md-6" id="contact_form" method="post" action="">
-                <input type="hidden" name="_token" value="gMKYAPjvsbZ5KqnWqBqaqCmR4odrcBnOP5kzDpI9">
+                @csrf
                 <div id="alert"></div>
                 <div class="form-group">
                     <label>Name:</label>
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="name" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label>Email:</label>
-                    <input type="email" name="email" class="form-control">
+                    <input type="email" name="email" class="form-control" required>
                 </div>
+                <div class="form-group">
+                    <label>Phone:</label>
+                    <input type="phone" name="phone" class="form-control">
+                </div>
+
                 <div class="form-group">
                     <label>Details of problem:</label>
-                    <textarea name="details" class="form-control" rows="5"></textarea>
+                    <textarea name="details" class="form-control" rows="5" required></textarea>
                 </div>
                 <div class="form-group">
-                    <button type="button" name="submit" onclick="javascript:contactSubmit();" class="btn btn-custom">
+                    <button type="button" name="submit" onclick="" class="btn btn-custom">
                         Submit
                     </button>
                 </div>

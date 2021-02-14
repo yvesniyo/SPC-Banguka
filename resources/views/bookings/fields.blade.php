@@ -1,13 +1,13 @@
 <!-- Bookable Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('bookable_id', 'Bookable Id:') !!}
-    {!! Form::number('bookable_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('bookable_id', 'Service:') !!}
+    {!! Form::select('bookable_id',$services, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Customer Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('customer_id', 'Customer Id:') !!}
-    {!! Form::number('customer_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('customer_id', 'Customer:') !!}
+    {!! Form::select('customer_id',$customers, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Starts At Field -->
@@ -17,17 +17,18 @@
 </div>
 
 @push('scripts')
-   <script type="text/javascript">
-           $('#starts_at').datetimepicker({
-               format: 'YYYY-MM-DD HH:mm:ss',
-               useCurrent: true,
-               icons: {
-                   up: "icon-arrow-up-circle icons font-2xl",
-                   down: "icon-arrow-down-circle icons font-2xl"
-               },
-               sideBySide: true
-           })
-       </script>
+<script type="text/javascript">
+    $('#starts_at').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm:ss'
+        , useCurrent: true
+        , icons: {
+            up: "icon-arrow-up-circle icons font-2xl"
+            , down: "icon-arrow-down-circle icons font-2xl"
+        }
+        , sideBySide: true
+    })
+
+</script>
 @endpush
 
 
@@ -38,17 +39,18 @@
 </div>
 
 @push('scripts')
-   <script type="text/javascript">
-           $('#ends_at').datetimepicker({
-               format: 'YYYY-MM-DD HH:mm:ss',
-               useCurrent: true,
-               icons: {
-                   up: "icon-arrow-up-circle icons font-2xl",
-                   down: "icon-arrow-down-circle icons font-2xl"
-               },
-               sideBySide: true
-           })
-       </script>
+<script type="text/javascript">
+    $('#ends_at').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm:ss'
+        , useCurrent: true
+        , icons: {
+            up: "icon-arrow-up-circle icons font-2xl"
+            , down: "icon-arrow-down-circle icons font-2xl"
+        }
+        , sideBySide: true
+    })
+
+</script>
 @endpush
 
 
@@ -59,17 +61,18 @@
 </div>
 
 @push('scripts')
-   <script type="text/javascript">
-           $('#canceled_at').datetimepicker({
-               format: 'YYYY-MM-DD HH:mm:ss',
-               useCurrent: true,
-               icons: {
-                   up: "icon-arrow-up-circle icons font-2xl",
-                   down: "icon-arrow-down-circle icons font-2xl"
-               },
-               sideBySide: true
-           })
-       </script>
+<script type="text/javascript">
+    $('#canceled_at').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm:ss'
+        , useCurrent: true
+        , icons: {
+            up: "icon-arrow-up-circle icons font-2xl"
+            , down: "icon-arrow-down-circle icons font-2xl"
+        }
+        , sideBySide: true
+    })
+
+</script>
 @endpush
 
 
@@ -79,11 +82,19 @@
     {!! Form::text('timezone', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 
+
+
 <!-- Price Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('price', 'Price:') !!}
     {!! Form::number('price', null, ['class' => 'form-control']) !!}
 </div>
+<!-- Currency Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('currency', 'Currency:') !!}
+    {!! Form::text('currency', null, ['class' => 'form-control','maxlength' => 3,'maxlength' => 3]) !!}
+</div>
+
 
 <!-- Quantity Field -->
 <div class="form-group col-sm-6">
@@ -97,11 +108,7 @@
     {!! Form::number('total_paid', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Currency Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('currency', 'Currency:') !!}
-    {!! Form::text('currency', null, ['class' => 'form-control','maxlength' => 3,'maxlength' => 3]) !!}
-</div>
+
 
 <!-- Notes Field -->
 <div class="form-group col-sm-12 col-lg-12">

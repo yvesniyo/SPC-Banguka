@@ -9,6 +9,9 @@ use App\Http\Requests\UpdateBookingRequest;
 use App\Repositories\BookingRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Booking;
+use App\Models\Customer;
+use App\Models\Service;
 use Response;
 
 class BookingController extends AppBaseController
@@ -39,7 +42,10 @@ class BookingController extends AppBaseController
      */
     public function create()
     {
-        return view('bookings.create');
+        $services = Service::htmlSelectIdName();
+        $customers = Customer::htmlSelectIdName();
+
+        return view('bookings.create', compact('services', 'customers'));
     }
 
     /**
@@ -97,7 +103,10 @@ class BookingController extends AppBaseController
             return redirect(route('bookings.index'));
         }
 
-        return view('bookings.edit')->with('booking', $booking);
+        $services = Service::htmlSelectIdName();
+        $customers = Customer::htmlSelectIdName();
+
+        return view('bookings.edit', compact('services', 'customers'))->with('booking', $booking);
     }
 
     /**
@@ -151,6 +160,37 @@ class BookingController extends AppBaseController
 
     public function calendar()
     {
-        return view("booking_calendar");
+        $item = [
+            "title" => 'Dr. Marilie Ebert PhD',
+            "start" => '2021-02-08 00:30:09',
+            "id" => '10',
+            "coupon" => '',
+            "status" => 'pending',
+            "textColor" => 'white'
+        ];
+
+
+        $services = Service::select(
+            'id',
+            'name',
+            "start_date",
+            "end_date",
+            "status"
+        )
+            ->withCount(['bookings'])
+            ->get();
+        // $services = collect($services);
+        $services = $services->map(function ($d) {
+            return [
+                "title" => $d->name . " (" . $d->bookings_count . ") Bookings",
+                "start" => $d->start_date->format("Y-m-d h:i:s"),
+                "end" => $d->end_date->format("Y-m-d h:i:s"),
+                "id" => $d->id,
+                "coupon" => '',
+                "status" => $d->status,
+                "textColor" => 'white'
+            ];
+        })->toArray();
+        return view("booking_calendar", compact('services'));
     }
 }

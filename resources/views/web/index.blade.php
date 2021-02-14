@@ -1,4 +1,4 @@
-@extends('web.index')
+@extends('web.master')
 
 @section('content')
 
@@ -9,6 +9,11 @@
                 <div class="all-title">
                     <p> We are planning </p>
                     <h3 class="sec-title"> Our mission </h3>
+
+                    <label class="mt-5">
+                        Our mission is to provide our clients with full
+                        and reliable information on which will improve their wealth and health
+                    </label>
                 </div>
             </div>
         </div>
@@ -77,65 +82,25 @@
                     </a>
                 </div>
             </div>
+
+            @foreach($categories as $key => $category)
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12 mb-30 categories-list" data-category-id="2">
-                <div class="ctg-item" style="background-image:url('https://appointo.froid.works/user-uploads/category/manicure.jpg')">
-                    <a href="javascript:;">
+                <div class="ctg-item" style="background-image:url({{ asset('/assets/img/WebServices.jpg') }})">
+                    <a href="#">
                         <div class="icon-box">
                             <i class="flaticon-fork"></i>
                         </div>
                         <div class="content-box">
                             <h5 class="mb-0">
-                                Courses
+                                {{ $category->name }}
                             </h5>
                         </div>
                     </a>
                 </div>
             </div>
 
-            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12 mb-30 categories-list" data-category-id="2">
-                <div class="ctg-item" style="background-image:url('https://appointo.froid.works/user-uploads/category/manicure.jpg')">
-                    <a href="javascript:;">
-                        <div class="icon-box">
-                            <i class="flaticon-fork"></i>
-                        </div>
-                        <div class="content-box">
-                            <h5 class="mb-0">
-                                Consolutance
-                            </h5>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            @endforeach
 
-            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12 mb-30 categories-list" data-category-id="2">
-                <div class="ctg-item" style="background-image:url('https://appointo.froid.works/user-uploads/category/manicure.jpg')">
-                    <a href="javascript:;">
-                        <div class="icon-box">
-                            <i class="flaticon-fork"></i>
-                        </div>
-                        <div class="content-box">
-                            <h5 class="mb-0">
-                                Talent
-                            </h5>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12 mb-30 categories-list" data-category-id="2">
-                <div class="ctg-item" style="background-image:url('https://appointo.froid.works/user-uploads/category/manicure.jpg')">
-                    <a href="javascript:;">
-                        <div class="icon-box">
-                            <i class="flaticon-fork"></i>
-                        </div>
-                        <div class="content-box">
-                            <h5 class="mb-0">
-                                TNPMS
-                            </h5>
-                        </div>
-                    </a>
-                </div>
-            </div>
 
 
 
@@ -155,31 +120,34 @@
             </div>
         </div>
         <div id="services" class="row">
+
+            @foreach($services as $key => $service)
             <div class="col-lg-3 col-md-6 col-12 mb-30 services-list service-category-2">
                 <div class="listing-item">
-                    <div class="img-holder" style="background-image: url('https://appointo.froid.works/user-uploads/service/4/manicure.jpg')">
+                    <div class="img-holder" style="background-image:url({{ $service->getFirstMediaUrl("images") }})">
+
                         <div class="category-name">
-                            <i class="flaticon-fork mr-1"></i>Nails
+                            <i class="flaticon-fork mr-1"></i>{{ $service->serviceCategory->name }}
                         </div>
                         <div class="time-remaining">
                             <i class="fa fa-clock-o mr-2"></i>
-                            <span>20 minutes</span>
+                            <span>{{ $service->interval }}</span>
                         </div>
                     </div>
                     <div class="list-content">
                         <h5 class="mb-2">
-                            <a href="https://appointo.froid.works/nails/manicure">Manicure</a>
+                            <a href="#">{{ $service->name }}</a>
                         </h5>
 
                         <ul class="ctg-info centering h-center v-center">
                             <li class="mt-1">
                                 <div class="service-price">
-                                    <span class="unit">$</span>50
+                                    {{ $service->price }} <span class="unit">Rwf</span>
                                 </div>
                             </li>
                             <li class="mt-1">
                                 <div class="dropdown add-items">
-                                    <a href="javascript:;" class="btn-custom btn-blue dropdown-toggle add-to-cart" data-service-price="50" data-service-id="4" data-service-name="Manicure" aria-expanded="false">
+                                    <a href="{{ route("web.booking", $service) }}" class="btn-custom btn-blue dropdown-toggle add-to-cart" data-service-price="50" data-service-id="4" data-service-name="Manicure" aria-expanded="false">
                                         Book <span class="fa fa-forward"></span>
                                     </a>
                                 </div>
@@ -188,39 +156,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-12 mb-30 services-list service-category-2">
-                <div class="listing-item">
-                    <div class="img-holder" style="background-image: url('https://appointo.froid.works/user-uploads/service/5/pedicure.jpg')">
-                        <div class="category-name">
-                            <i class="flaticon-fork mr-1"></i>Nails
-                        </div>
-                        <div class="time-remaining">
-                            <i class="fa fa-clock-o mr-2"></i>
-                            <span>20 minutes</span>
-                        </div>
-                    </div>
-                    <div class="list-content">
-                        <h5 class="mb-2">
-                            <a href="https://appointo.froid.works/nails/pedicure">Pedicure</a>
-                        </h5>
 
-                        <ul class="ctg-info centering h-center v-center">
-                            <li class="mt-1">
-                                <div class="service-price">
-                                    <span class="unit">$</span>5
-                                </div>
-                            </li>
-                            <li class="mt-1">
-                                <div class="dropdown add-items">
-                                    <a href="javascript:;" class="btn-custom btn-blue dropdown-toggle add-to-cart" data-service-price="5" data-service-id="5" data-service-name="Pedicure" aria-expanded="false">
-                                        Book <span class="fa fa-forward"></span>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+
+
 
         </div>
     </div>

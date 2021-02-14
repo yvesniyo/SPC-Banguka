@@ -1,71 +1,159 @@
-<!-- Name Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('name', 'Name:') !!}
-    {!! Form::text('name', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+<div class="col-12">
+    <div class="row">
+        <!-- Name Field -->
+        <div class="form-group col-4">
+            {!! Form::label('name', 'Name:') !!}
+            {!! Form::text('name', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+        </div>
+        <!-- Slug Field -->
+        <div class="form-group col-sm-4">
+            {!! Form::label('slug', 'Slug:') !!}
+            {!! Form::text('slug', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+        </div>
+
+
+
+        <!-- Service Category Id Field -->
+        <div class="form-group col-4">
+            {!! Form::label('service_category_id', 'Service Category:') !!}
+            {!! Form::select('service_category_id', $categories,null, ['class' => 'form-control']) !!}
+        </div>
+
+    </div>
 </div>
 
-<!-- Service Category Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('service_category_id', 'Service Category:') !!}
-    {!! Form::select('service_category_id', $categories,null, ['class' => 'form-control']) !!}
-</div>
+<div class="col-12">
+    <div class="row">
+        <!-- Price Field -->
+        <div class="form-group col-sm-3">
+            {!! Form::label('price', 'Price:') !!}
+            {!! Form::number('price', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+        </div>
+        <!-- Discount Field -->
+        <div class="form-group col-sm-3">
+            {!! Form::label('discount', 'Discount:') !!}
+            {!! Form::number('discount', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+        </div>
 
-<!-- Price Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('price', 'Price:') !!}
-    {!! Form::text('price', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
-</div>
+        <!-- Discount Type Field -->
+        <div class="form-group col-sm-3">
+            {!! Form::label('discount_type', 'Discount Type:') !!}
+            {!! Form::select('discount_type', discountType(),null, ['class' => 'form-control']) !!}
 
+        </div>
+
+        <!-- Total Type Field -->
+        <div class="form-group col-sm-3">
+            {!! Form::label('calculated_total', 'Calculated Total:') !!}
+            <div>
+                {!! Form::label('total', '. Rwf') !!}
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
 <!-- Employee Id Field -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-12">
     {!! Form::label('employee_id', 'Employee:') !!}
-    {!! Form::select('employee_id',$employees,null, ['class' => 'form-control']) !!}
+    {!! Form::select('employee_id', [""=>"None "]+$employees->toArray(),null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Status Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('status', 'Status:') !!}
-    {!! Form::text('status', null, ['class' => 'form-control']) !!}
-</div>
+
+
+
 
 <!-- Description Field -->
 <div class="form-group col-sm-12 col-lg-12">
     {!! Form::label('description', 'Description:') !!}
-    {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+    {!! Form::textarea('description', null, ['class' => 'form-control summernote-simple']) !!}
+
 </div>
 
-<!-- Slug Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('slug', 'Slug:') !!}
-    {!! Form::text('slug', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+<div class="col-12">
+    <div class="row">
+
+        <div class="form-group col-sm-6">
+            <label>Date Range Of Service</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                </div>
+                @if(old("dateRange"))
+                <input type="text" value="{{ old("dateRange") }}" name="dateRange" class="form-control daterange-cus">
+                @else
+                <input type="text" value="{{ $service->start_date }} - {{ $service->end_date }} " name="dateRange" class="form-control daterange-cus">
+                @endif
+
+            </div>
+        </div>
+        <!-- Status Field -->
+        <div class="form-group col-sm-6">
+            {!! Form::label('status', 'Status:') !!}
+            {!! Form::select('status', boolStatus(), null, ['class' => 'form-control']) !!}
+
+        </div>
+
+
+    </div>
 </div>
 
-<!-- Discount Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('discount', 'Discount:') !!}
-    {!! Form::text('discount', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+<div class="form-group col-sm-12">
+    {!! Form::label('image', 'Image :') !!}
+    {!! Form::file('image', null, ['class' => 'form-control']) !!}
+
 </div>
 
-<!-- Discount Type Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('discount_type', 'Discount Type:') !!}
-    {!! Form::text('discount_type', null, ['class' => 'form-control']) !!}
-</div>
 
-<!-- Time Required Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('time_required', 'Time Required:') !!}
-    {!! Form::number('time_required', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Time Required Type Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('time_required_type', 'Time Required Type:') !!}
-    {!! Form::text('time_required_type', null, ['class' => 'form-control']) !!}
-</div>
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
     <a href="{{ route('services.index') }}" class="btn btn-secondary">Cancel</a>
 </div>
+
+@push('css')
+<link rel="stylesheet" href="{{ asset("/assets/css/summernote-bs4.css") }}">
+<link rel="stylesheet" href="{{ asset("/assets/css/daterangepicker.css") }}">
+
+
+
+@endpush
+@push('js')
+<script src="{{ asset("/assets/js/summernote-bs4.js") }}"></script>
+<script src="{{ asset("/assets/js/daterangepicker.js") }}"></script>
+
+<script>
+    $('.daterange-cus').daterangepicker({
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
+        , drops: 'down'
+        , opens: 'right'
+    });
+
+
+    function convertToSlug(Text) {
+        return Text
+            .toLowerCase()
+            .replace(/[^\w ]+/g, '')
+            .replace(/ +/g, '-');
+    }
+
+    $("#name").on("keyup", function(e) {
+        text = convertToSlug($("#name").val());
+        $("#slug").val(text);
+        console.log(text);
+    });
+
+</script>
+
+<script>
+
+</script>
+@endpush
