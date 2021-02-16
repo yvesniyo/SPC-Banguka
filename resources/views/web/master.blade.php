@@ -130,7 +130,11 @@
         }
 
         label.mt-5 {
-            color: white;
+            color: black;
+        }
+
+        .sec-title {
+            color: yellow;
         }
 
         .bg-w {
