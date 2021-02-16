@@ -7,7 +7,7 @@
         <div class="col-12">
             <div class="all-title">
                 <h3 class="sec-title">
-                    About Us bsd
+                    About Us
                 </h3>
             </div>
         </div>
