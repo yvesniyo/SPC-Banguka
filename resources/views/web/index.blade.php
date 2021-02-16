@@ -74,7 +74,7 @@
             <div class="col-12">
                 <div class="all-title">
                     <p>we provide best services</p>
-                    <h3 class="sec-title">
+                    <h3 class="sec-title text-black-50 ">
                         Categories </h3>
                 </div>
             </div>
