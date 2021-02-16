@@ -15,7 +15,7 @@
     <div class="content mx-5">
         <h4>WHAT DOES SOCIAL ENTERPRENEURSHIP SOLUTION MEAN?</h4>
         <p>
-            This is a special course provided by <strong> SPC LIMITED </strong> to help people, especially students to maximize their potential of what they do.
+            This is a special course provided by <strong> SPC LIMITED </strong> to help people, especially students and professionals to maximize their potential of what they do.
 
         </p>
 
@@ -60,9 +60,16 @@
                     <li>SAVING MONEY</li>
                     <li>INVESTING MONEY</li>
                     <li>LOAN</li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4 mt-3">
+                <h5>DIGITAL LITERACY</h5>
+                <ul style="list-style-type: circle;">
 
                 </ul>
             </div>
+
 
 
         </div>
