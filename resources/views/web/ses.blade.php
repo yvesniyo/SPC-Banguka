@@ -2,7 +2,8 @@
 
 
 @section('content')
-<div class="container pt-5 pb-5">
+<div class="container-fluid pt-5 pb-5 ">
+
     <div class="row">
         <div class="col-12">
             <div class="all-title">
@@ -63,11 +64,27 @@
                 </ul>
             </div>
 
-            <div class="col-lg-4 mt-3">
+            <div class="col-lg-12 mt-3">
                 <h5>DIGITAL LITERACY</h5>
-                <ul style="list-style-type: circle;">
+                <p>
+                    The ability to use ICT and the Internet becomes a new form of literacy — “digital literacy”. Digital literacy is fast becoming a prerequisite for creativity, innovation and entrepreneurship and without it citizens can neither participate fully in society nor acquire the skills and knowledge necessary to live in the 21st century.
 
-                </ul>
+
+                </p>
+                <p>
+                    the ability to understand and use information in multiple formats from a wide range of sources when it is presented via computers. The concept of literacy goes beyond simply being able to read; it has always meant the ability to read with meaning, and to understand. It is the fundamental act of cognition. Digital literacy likewise extends the boundaries of definition. It is cognition of what you see on the computer screen when you use the networked medium. It places demands upon you that were always present, though less visible, in the analog media of newspaper and TV. At the same time, it conjures up a new set of challenges that require you to approach networked computers without preconceptions. Not only must you acquire the skill of finding things, you must also acquire the ability to use these things in your life.
+
+                </p>
+
+                <ol>
+                    <li>Awareness of the ICT and information environment</li>
+                    <li>Confidence in using generic ICT and information tools</li>
+                    <li>Evaluation of information-handling operations and products</li>
+                    <li>Reflection on one’s own Literacy development</li>
+                    <li>Adaptability and willingness to meet Literacy challenges</li>
+                </ol>
+
+
             </div>
 
 

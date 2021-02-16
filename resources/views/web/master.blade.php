@@ -129,6 +129,14 @@
             border-bottom: none;
         }
 
+        label.mt-5 {
+            color: white;
+        }
+
+        .bg-w {
+            background-color: #00b05096 !important;
+        }
+
     </style>
 
 
@@ -171,7 +179,7 @@ $settings = settings();
                     </div>
                     <div class="col-lg-8 col-12 my-lg-0 my-2">
                         <ul class="head-contact-right">
-                            <li class="language-drop mb-3">
+                            <li class="language-drop mb-3 d-none">
                                 <div class="dropdown">
                                     <a href="#" class="dropdown-toggle text-capitalize" data-toggle="dropdown">
                                         <i class="fa fa-globe"></i> Language </a>
