@@ -76,7 +76,7 @@
 
                 </p>
 
-                <p>The factors while we focus on digital literacy:</p>
+                <p>The factors why we focus on digital literacy:</p>
 
                 <ol>
                     <li>Awareness of the ICT and information environment</li>
