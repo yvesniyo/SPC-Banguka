@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\ContactUs;
 use App\Models\Service;
 use App\Models\ServiceBooking;
 use App\Models\ServiceCategory;
@@ -39,20 +40,17 @@ class WebController extends Controller
         return view("web.index", compact('categories', 'services'));
     }
 
-    public function aboutUs()
+
+
+    public function contactUs(Request $request)
     {
-        return view("web.about-us");
+        $validated = $this->validate($request, ContactUs::$rules);
+        $contactus = ContactUs::create($validated);
+        Flash::success("Thank you for contacting us, you will hear from us soon.");
+        return view("web.contact-us-success");
     }
 
-    public function contactUs()
-    {
-        return view("web.contact-us");
-    }
 
-    public function privacyPolicy()
-    {
-        return view("web.privacy-policy");
-    }
 
     public function search(ServiceRepository $serviceRepository, Request $request)
     {

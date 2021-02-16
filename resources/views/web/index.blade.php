@@ -11,11 +11,22 @@
                     <h3 class="sec-title"> Our mission </h3>
 
                     <label class="mt-5">
-                        Our mission is to provide our clients with full
-                        and reliable information on which will improve their wealth and health
+                        Creating new enterpreneurs and expanding existed enterpreneurs.
                     </label>
                 </div>
             </div>
+
+            <div class="col-12">
+                <div class="all-title">
+                    <p> We are Willing </p>
+                    <h3 class="sec-title"> Our vision </h3>
+
+                    <label class="mt-5">
+                        To establish job for all and food security for all.
+                    </label>
+                </div>
+            </div>
+
         </div>
 
         <div class="row" id="owl-carousel">

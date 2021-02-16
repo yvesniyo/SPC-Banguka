@@ -74,3 +74,9 @@
         <span>Settings</span>
     </a>
 </li>
+<li class="{{ Request::is('contactuses*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('contactuses.index') }}">
+        <i class="nav-icon icon-cursor"></i>
+        <span>Contacting Us</span>
+    </a>
+</li>

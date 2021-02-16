@@ -4,6 +4,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\StaticPagesController;
 use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -33,13 +34,14 @@ Route::get("/guest/login", [CustomerAuthController::class, "loginForm"])->name("
 Route::group(["prefix" => ""], function () {
     Route::get("", [WebController::class, "index"])->name("web");
     Route::get("/search", [WebController::class, "search"])->name("web.search");
-    Route::get("/contact-us", [WebController::class, "contactUs"])->name("web.contactUs");
-    Route::get("/about-us", [WebController::class, "aboutUs"])->name("web.aboutUs");
+    Route::post("/contactUs", [WebController::class, "contactUs"])->name("web.contactUs");
+
+
+
     Route::get("/serviceCategory/{serviceCategory}", [WebController::class, "serviceCategory"])->name("web.serviceCategory");
     Route::get("/checkout/{serviceBooking}", [WebController::class, "checkout"])->name("web.checkout");
     Route::get("/booking/{service}", [WebController::class, "booking"])->name("web.booking");
     Route::post("/booking/{service}/save", [WebController::class, "saveBooking"])->name("web.booking.save");
-    Route::get("/privacy-policy", [WebController::class, "privacyPolicy"])->name("web.privacyPolicy");
 });
 
 
@@ -61,3 +63,10 @@ Route::group(["prefix" => "dashboard", "middleware" => "auth"], function () {
     Route::resource("settings", SettingsController::class);
     Route::resource("profile", ProfileController::class);
 });
+
+
+Route::get("/{page}", StaticPagesController::class)->name("web.statics")
+    ->where("page", "about-us|contact-us|tip2050|ses|privact-policy");
+
+
+Route::resource('contactuses', App\Http\Controllers\ContactUsController::class);
