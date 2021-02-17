@@ -134,7 +134,7 @@
         }
 
         .sec-title {
-            color: yellow;
+            color: #ff6347;
         }
 
         .bg-w {
