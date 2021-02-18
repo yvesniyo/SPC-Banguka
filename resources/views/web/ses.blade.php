@@ -84,6 +84,7 @@
                     <li>Evaluation of information-handling operations and products</li>
                     <li>Reflection on one’s own Literacy development</li>
                     <li>Adaptability and willingness to meet Literacy challenges</li>
+                    <li>WEB, PHONE ,SOFTWARE DESIGN</li>
                 </ol>
 
 
