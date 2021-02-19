@@ -21,8 +21,16 @@ class SaveUserSessionRefererMiddleware
         $referer_set = session("referer_set", null);
         if (!$referer_set) {
             $request->session()->put("referer_set", "yes");
+            $name = SpatieReferer::get();
+
+            $sitelink = "http://". $name;
+            $domain_pieces = explode(".", parse_url($sitelink, PHP_URL_HOST));
+            $l = sizeof($domain_pieces);
+            if($l>1){
+                $secondleveldomain = ($domain_pieces[$l-2] . "." . $domain_pieces[$l-1]);
+            }
             Referer::create([
-                "name" => SpatieReferer::get(),
+                "name" => $name == "" ?  "direct" : $secondleveldomain,
             ]);
         }
         return $next($request);
