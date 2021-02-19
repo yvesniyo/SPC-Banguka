@@ -83,7 +83,7 @@ class ServiceController extends AppBaseController
 
         try {
             $service->addMedia($request->file('image'))->toMediaCollection('images');
-        } catch (Exception $e) {}
+        } catch (Throwable $e) {}
 
         Flash::success('Service saved successfully.');
 
@@ -159,7 +159,7 @@ class ServiceController extends AppBaseController
 
         try {
             $service->addMedia($request->file('image'))->toMediaCollection('images');
-        } catch (Exception $e) {}
+        } catch (Throwable $e) {}
 
         Flash::success('Service updated successfully.');
 
