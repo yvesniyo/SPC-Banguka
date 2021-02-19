@@ -54,7 +54,9 @@ class ServiceController extends AppBaseController
         [$startDate, $endDate] = explode(" - ", $input["dateRange"]);
         $input["start_date"] = Carbon::parse($startDate);
         $input["end_date"] = Carbon::parse($endDate);
-        $input["time_required"] = Carbon::parse($startDate)->diffInDays(Carbon::parse($endDate));
+        $input["time_required"] = Carbon::parse($startDate)->diffInDaysFiltered(function(Carbon $date){
+            return !$date->isWeekend();
+        },Carbon::parse($endDate));
         $input["time_required_type"] = "days";
         $input["real_price"] = $input["price"];
         $input["price"] = $input["real_price"] /  $input["time_required"];
@@ -79,7 +81,9 @@ class ServiceController extends AppBaseController
 
         $service = $this->serviceRepository->create($input);
 
-        $service->addMedia($request->file('image'))->toMediaCollection('images');
+        try {
+            $service->addMedia($request->file('image'))->toMediaCollection('images');
+        } catch (Exception $e) {}
 
         Flash::success('Service saved successfully.');
 
@@ -152,6 +156,10 @@ class ServiceController extends AppBaseController
         $this->serviceRequestCreateUpdate($input);
 
         $service = $this->serviceRepository->update($input, $id);
+
+        try {
+            $service->addMedia($request->file('image'))->toMediaCollection('images');
+        } catch (Exception $e) {}
 
         Flash::success('Service updated successfully.');
 
