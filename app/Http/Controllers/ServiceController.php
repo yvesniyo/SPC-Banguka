@@ -83,7 +83,8 @@ class ServiceController extends AppBaseController
 
         try {
             $service->addMedia($request->file('image'))->toMediaCollection('images');
-        } catch (Throwable $e) {}
+        }catch(\Spatie\MediaLibrary\MediaCollections\Exceptions\UnknownType $e){}
+        catch (Throwable $e) {}
 
         Flash::success('Service saved successfully.');
 
@@ -159,7 +160,8 @@ class ServiceController extends AppBaseController
 
         try {
             $service->addMedia($request->file('image'))->toMediaCollection('images');
-        } catch (Throwable $e) {}
+        }catch(\Spatie\MediaLibrary\MediaCollections\Exceptions\UnknownType $e){}
+        catch (Throwable $e) {}
 
         Flash::success('Service updated successfully.');
 
