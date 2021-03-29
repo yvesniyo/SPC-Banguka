@@ -66,7 +66,7 @@ Route::group(["prefix" => "dashboard", "middleware" => "auth"], function () {
 
 
 Route::get("/{page}", StaticPagesController::class)->name("web.statics")
-    ->where("page", "about-us|contact-us|tip2050|ses|privact-policy");
+    ->where("page", "about-us|contact-us|tip2050|ses|documents|privact-policy");
 
 
 Route::resource('contactuses', App\Http\Controllers\ContactUsController::class);

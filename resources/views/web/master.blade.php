@@ -243,6 +243,10 @@ $settings = settings();
         <a href="{{ route("web.statics",[
             "page"=> "ses"
         ]) }}" class="{{ Request::is('ses*') ? 'active' : '' }}">SES</a>
+        
+        <a href="{{ route("web.statics",[
+            "page"=> "documents"
+        ]) }}" class="{{ Request::is('documents*') ? 'active' : '' }}">Documents</a>
 
         <a href="{{ route("web.statics",[
             "page"=> "contact-us"
